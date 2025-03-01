@@ -8,7 +8,7 @@ import {
 } from "@blueprintjs/core";
 import { FC } from "react";
 
-export const Signin: FC = () => {
+const SignIn: FC = () => {
 	return (
 		<Card elevation={Elevation.ONE}>
 			<H4>Sign in</H4>
@@ -26,3 +26,5 @@ export const Signin: FC = () => {
 		</Card>
 	);
 };
+
+export default SignIn;
