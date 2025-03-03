@@ -1,0 +1,16 @@
+.layout {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	max-width: 1400px;
+	margin: 0 auto;
+}
+
+.invalid {
+	margin-top: 10px;
+	color: rgba(255, 0, 0, 0.601);
+}

@@ -17,8 +17,8 @@ const authSlice = createSlice({
 			action: PayloadAction<{ name: string; password: string }>
 		) => {
 			if (
-				action.payload.name === "User" &&
-				action.payload.password === "12345"
+				action.payload.name === "admin" &&
+				action.payload.password === "password"
 			) {
 				state.isUserLoggedIn = true;
 			}
@@ -31,6 +31,8 @@ export const store = configureStore({
 		auth: authSlice.reducer,
 	},
 });
+
+export const authActions = authSlice.actions;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

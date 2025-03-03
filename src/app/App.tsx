@@ -1,7 +1,15 @@
-import "./App.css";
+import { RouterProvider } from "react-router-dom";
+import { router } from "./routes/router";
 
 function App() {
-	return <></>;
+	return (
+		<RouterProvider
+			future={{
+				v7_startTransition: true,
+			}}
+			router={router}
+		/>
+	);
 }
 
 export default App;
