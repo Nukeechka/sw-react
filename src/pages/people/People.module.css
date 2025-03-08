@@ -1,0 +1,8 @@
+.list {
+	min-width: 1400px;
+}
+
+.card {
+	flex-direction: column;
+	align-items: start;
+}

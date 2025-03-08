@@ -20,7 +20,7 @@ const Root = () => {
 					</div>
 				</Navbar>
 			</header>
-			<main>
+			<main className={styles["container-outlet"]}>
 				<Outlet />
 			</main>
 			<footer>
