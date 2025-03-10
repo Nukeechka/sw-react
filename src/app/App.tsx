@@ -1,5 +1,6 @@
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/router";
+import { Spinner } from "@blueprintjs/core";
 
 function App() {
 	return (
@@ -8,6 +9,7 @@ function App() {
 				v7_startTransition: true,
 			}}
 			router={router}
+			fallbackElement={<Spinner size={50} />}
 		/>
 	);
 }

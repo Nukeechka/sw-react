@@ -11,8 +11,14 @@ const People = () => {
 	return (
 		<>
 			<CardList className={styles.list} bordered={false}>
-				{data.results.map((item) => {
-					return <CustomCard key={item.name} item={item} />;
+				{data.results.map((item, index) => {
+					return (
+						<CustomCard
+							key={item.name}
+							item={item}
+							peopleId={index + 1}
+						/>
+					);
 				})}
 			</CardList>
 		</>

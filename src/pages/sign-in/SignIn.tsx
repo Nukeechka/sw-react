@@ -23,7 +23,7 @@ const SignIn: FC = () => {
 
 	useEffect(() => {
 		if (isUserLoggedIn) {
-			navigate("/people");
+			navigate("/");
 		}
 	}, [isUserLoggedIn]);
 

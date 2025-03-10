@@ -23,6 +23,9 @@ const authSlice = createSlice({
 				state.isUserLoggedIn = true;
 			}
 		},
+		logout: (state) => {
+			state.isUserLoggedIn = false;
+		},
 	},
 });
 

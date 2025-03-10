@@ -1,8 +1,18 @@
 import { Navbar, Alignment, Button, H5 } from "@blueprintjs/core";
 import styles from "./Root.module.css";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks/hooks";
+import { authActions } from "../../app/store/store";
 
 const Root = () => {
+	const dispatchAction = useAppDispatch();
+	const navigate = useNavigate();
+
+	const logoutHandler = () => {
+		dispatchAction(authActions.logout());
+		navigate("/login");
+	};
+
 	return (
 		<div className={styles.layout}>
 			<header>
@@ -14,8 +24,14 @@ const Root = () => {
 							<Navbar.Heading>SWAPI</Navbar.Heading>
 						</Navbar.Group>
 						<Navbar.Group align={Alignment.RIGHT}>
-							<Button minimal text="Home" />
-							<Button minimal text="Logout" />
+							<NavLink to={"/"}>
+								<Button minimal text="Home" />
+							</NavLink>
+							<Button
+								onClick={logoutHandler}
+								minimal
+								text="Logout"
+							/>
 						</Navbar.Group>
 					</div>
 				</Navbar>

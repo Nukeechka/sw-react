@@ -1,11 +1,25 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import {
+	ActionFunctionArgs,
+	createBrowserRouter,
+	LoaderFunction,
+	ParamParseKey,
+	Params,
+	redirect,
+} from "react-router-dom";
 import SignIn from "../../pages/sign-in/SignIn";
 import Root from "../../pages/root/Root";
 import { store } from "../store/store";
 import People from "../../pages/people/People";
-import { getPeople } from "../../shared/utils/api/swapi";
-import { PeopleResponse } from "../../shared/interfaces/people.interface";
+import { getPeople, getPerson } from "../../shared/utils/api/swapi";
 import { Person } from "../../pages/person/Person";
+
+const PathNames = {
+	peopleDetails: "people/:peopleId",
+} as const;
+
+interface Args extends ActionFunctionArgs {
+	params: Params<ParamParseKey<typeof PathNames.peopleDetails>>;
+}
 
 const rootLoader = () => {
 	const state = store.getState();
@@ -16,9 +30,14 @@ const rootLoader = () => {
 	return null;
 };
 
-const peopleLoader = async (): Promise<PeopleResponse> => {
+const peopleLoader = async () => {
 	const people = await getPeople();
 	return people;
+};
+
+const personLoader: LoaderFunction = async ({ params }: Args) => {
+	const person = await getPerson(params.peopleId ?? "");
+	return person;
 };
 
 export const router = createBrowserRouter(
@@ -29,20 +48,19 @@ export const router = createBrowserRouter(
 			loader: rootLoader,
 			children: [
 				{
-					path: "/people",
+					index: true,
 					element: <People />,
 					loader: peopleLoader,
-					children: [
-						{
-							path: "/people/:peopleId",
-							element: <Person />,
-						},
-					],
+				},
+				{
+					path: "people/:peopleId",
+					element: <Person />,
+					loader: personLoader,
 				},
 			],
 		},
 		{
-			path: "/login",
+			path: "login",
 			element: <SignIn />,
 		},
 	],
