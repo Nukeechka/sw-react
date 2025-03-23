@@ -30,10 +30,11 @@ const rootLoader = () => {
 	return null;
 };
 
-const peopleLoader = async () => {
-	const people = await getPeople();
-	return people;
-};
+// const peopleLoader = async ({ params }: Params) => {
+// 	const people = await getPeople();
+// 	console.log(params);
+// 	return people;
+// };
 
 const personLoader: LoaderFunction = async ({ params }: Args) => {
 	const person = await getPerson(params.peopleId ?? "");
@@ -50,7 +51,10 @@ export const router = createBrowserRouter(
 				{
 					index: true,
 					element: <People />,
-					loader: peopleLoader,
+					loader: async () => {
+						const people = await getPeople();
+						return people;
+					},
 				},
 				{
 					path: "people/:peopleId",
